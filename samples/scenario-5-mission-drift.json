@@ -1,0 +1,21 @@
+{
+  "packet_id": "PKT-S5",
+  "finding": "Maintenance action required for the relay.",
+  "equipment_id": "PRA-404",
+  "supporting_evidence": [
+    {
+      "source_id": "SRC-S5-A",
+      "source_type": "synthetic_case_note",
+      "timestamp": "2026-07-01T00:00:00.000Z",
+      "excerpt": "One case note was observed.",
+      "provenance_metadata": "Scenario fixture evidence.",
+      "uncertainty_notes": ["Fixture evidence."],
+      "independence_group": "SRC-S5-A",
+      "assessment": "uncertain"
+    }
+  ],
+  "confidence": 0.4,
+  "uncertainty": ["The language is intentionally unsafe for testing."],
+  "human_review_required": true,
+  "advisory_only_statement": "The system confirms failure and maintenance action required."
+}

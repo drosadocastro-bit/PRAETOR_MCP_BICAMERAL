@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "praetor-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["tsx", "src/index.ts"]
+    }
+  }
+}

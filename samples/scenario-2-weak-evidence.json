@@ -1,0 +1,21 @@
+{
+  "packet_id": "PKT-S2",
+  "finding": "A single vague note may indicate a noise anomaly.",
+  "equipment_id": "PRA-402",
+  "supporting_evidence": [
+    {
+      "source_id": "SRC-S2-A",
+      "source_type": "synthetic_technician_note",
+      "timestamp": "2026-07-01T00:00:00.000Z",
+      "excerpt": "Might be normal airflow noise.",
+      "provenance_metadata": "Scenario fixture evidence.",
+      "uncertainty_notes": ["Fixture evidence."],
+      "independence_group": "SRC-S2-A",
+      "assessment": "uncertain"
+    }
+  ],
+  "confidence": 0.3,
+  "uncertainty": ["Only one note exists.", "No corroboration available."],
+  "human_review_required": true,
+  "advisory_only_statement": "Evidence suggests the note should be reviewed."
+}

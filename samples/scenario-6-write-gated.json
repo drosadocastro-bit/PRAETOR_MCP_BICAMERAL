@@ -1,0 +1,21 @@
+{
+  "packet_id": "PKT-S6",
+  "finding": "The harness signal drop may indicate a recurring connection issue.",
+  "equipment_id": "PRA-405",
+  "supporting_evidence": [
+    {
+      "source_id": "SRC-S6-A",
+      "source_type": "synthetic_inspection_log",
+      "timestamp": "2026-07-01T00:00:00.000Z",
+      "excerpt": "Intermittent signal drop appears when harness flexes.",
+      "provenance_metadata": "Scenario fixture evidence.",
+      "uncertainty_notes": ["Fixture evidence."],
+      "independence_group": "SRC-S6-A",
+      "assessment": "elevated"
+    }
+  ],
+  "confidence": 0.45,
+  "uncertainty": ["Only one observation exists for now."],
+  "human_review_required": true,
+  "advisory_only_statement": "Evidence suggests this should be reviewed as an advisory only packet."
+}

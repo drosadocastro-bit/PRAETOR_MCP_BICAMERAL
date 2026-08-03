@@ -1,0 +1,41 @@
+{
+  "packet_id": "PKT-S4",
+  "finding": "Three advisories point to the same upstream case and do not confirm the claim independently.",
+  "equipment_id": "PRA-404",
+  "supporting_evidence": [
+    {
+      "source_id": "SRC-S4-A",
+      "source_type": "synthetic_case_note",
+      "timestamp": "2026-07-01T00:00:00.000Z",
+      "excerpt": "Repeated advisory trace.",
+      "provenance_metadata": "Scenario fixture evidence.",
+      "uncertainty_notes": ["Fixture evidence."],
+      "independence_group": "shared-upstream",
+      "assessment": "uncertain"
+    },
+    {
+      "source_id": "SRC-S4-A",
+      "source_type": "synthetic_case_note",
+      "timestamp": "2026-07-01T00:00:00.000Z",
+      "excerpt": "Repeated advisory trace.",
+      "provenance_metadata": "Scenario fixture evidence.",
+      "uncertainty_notes": ["Fixture evidence."],
+      "independence_group": "shared-upstream",
+      "assessment": "uncertain"
+    },
+    {
+      "source_id": "SRC-S4-A",
+      "source_type": "synthetic_case_note",
+      "timestamp": "2026-07-01T00:00:00.000Z",
+      "excerpt": "Repeated advisory trace.",
+      "provenance_metadata": "Scenario fixture evidence.",
+      "uncertainty_notes": ["Fixture evidence."],
+      "independence_group": "shared-upstream",
+      "assessment": "uncertain"
+    }
+  ],
+  "confidence": 0.61,
+  "uncertainty": ["No independent confirmation exists."],
+  "human_review_required": true,
+  "advisory_only_statement": "Consensus here is not independent evidence."
+}

@@ -1,0 +1,31 @@
+{
+  "packet_id": "PKT-S3",
+  "finding": "The cooling trend is unresolved and should be reviewed.",
+  "equipment_id": "PRA-403",
+  "supporting_evidence": [
+    {
+      "source_id": "SRC-S3-A",
+      "source_type": "synthetic_inspection_log",
+      "timestamp": "2026-07-01T00:00:00.000Z",
+      "excerpt": "Temperature rise accompanied the fan noise.",
+      "provenance_metadata": "Scenario fixture evidence.",
+      "uncertainty_notes": ["Fixture evidence."],
+      "independence_group": "SRC-S3-A",
+      "assessment": "elevated"
+    },
+    {
+      "source_id": "SRC-S3-B",
+      "source_type": "synthetic_followup_report",
+      "timestamp": "2026-07-01T00:00:00.000Z",
+      "excerpt": "Follow-up returned to normal range.",
+      "provenance_metadata": "Scenario fixture evidence.",
+      "uncertainty_notes": ["Fixture evidence."],
+      "independence_group": "SRC-S3-B",
+      "assessment": "normal"
+    }
+  ],
+  "confidence": 0.54,
+  "uncertainty": ["Conflicting observations remain unresolved."],
+  "human_review_required": true,
+  "advisory_only_statement": "This contradictory set requires human review."
+}

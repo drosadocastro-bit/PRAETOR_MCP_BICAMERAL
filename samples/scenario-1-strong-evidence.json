@@ -1,0 +1,31 @@
+{
+  "packet_id": "PKT-S1",
+  "finding": "Repeated vibration and seal wear may indicate a recurring hydraulic issue.",
+  "equipment_id": "PRA-401",
+  "supporting_evidence": [
+    {
+      "source_id": "SRC-S1-A",
+      "source_type": "synthetic_inspection_log",
+      "timestamp": "2026-07-01T00:00:00.000Z",
+      "excerpt": "Repeated vibration observed during warm-up.",
+      "provenance_metadata": "Scenario fixture evidence.",
+      "uncertainty_notes": ["Fixture evidence."],
+      "independence_group": "SRC-S1-A",
+      "assessment": "elevated"
+    },
+    {
+      "source_id": "SRC-S1-B",
+      "source_type": "synthetic_technician_note",
+      "timestamp": "2026-07-01T00:00:00.000Z",
+      "excerpt": "Independent technician note confirms the same pattern.",
+      "provenance_metadata": "Scenario fixture evidence.",
+      "uncertainty_notes": ["Fixture evidence."],
+      "independence_group": "SRC-S1-B",
+      "assessment": "elevated"
+    }
+  ],
+  "confidence": 0.76,
+  "uncertainty": ["Root cause is still unconfirmed."],
+  "human_review_required": false,
+  "advisory_only_statement": "Evidence suggests the recurring pattern should be reviewed by a human."
+}

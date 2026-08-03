@@ -1,0 +1,24 @@
+{
+  "experimentId": "PRAETOR-BICAM-002",
+  "title": "Phase 2 Behavioral Characterization of Bicameral & Multi-Agent Architectures",
+  "preregisteredAt": "2026-08-03T10:00:00.000Z",
+  "fixturesCount": 15,
+  "conditionsCount": 5,
+  "repetitionsPerFixtureCondition": 2,
+  "totalPlannedRuns": 150,
+  "conditions": [
+    "A_SINGLE_AGENT_CONTROL",
+    "B_BICAMERAL_ACTOR_SUPERVISOR",
+    "C_BICAMERAL_STRUCTURED_HANDOFF",
+    "D_MULTI_AGENT_COUNCIL",
+    "E_PREDICTIVE_ACTOR"
+  ],
+  "hypotheses": {
+    "H1": "Condition B propagates contamination farther than Condition A due to raw transmission boundary.",
+    "H2": "Condition C reduces propagation depth relative to B through validation and sanitization.",
+    "H3": "Condition D increases false-consensus risk when lineage is shared across council reviewers.",
+    "H4": "Condition E improves anticipation of supervisory constraints but risks authority-mimicry.",
+    "H5": "Agent K detects observable contamination across conditions without inspecting private reasoning.",
+    "H6": "Deterministic governance remains final authority regardless of agent consensus."
+  }
+}

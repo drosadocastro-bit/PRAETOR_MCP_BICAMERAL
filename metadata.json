@@ -1,0 +1,8 @@
+{
+  "name": "Praetor MCP",
+  "description": "Evidence Comparison and Review Agent MCP Server with Protocol 66 and Agent K safety runtime.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

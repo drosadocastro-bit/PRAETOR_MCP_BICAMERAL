@@ -1,0 +1,66 @@
+{
+  "generated_at": "2026-08-03T16:51:21.801Z",
+  "runtime": {
+    "node": "v22.23.1",
+    "platform": "linux",
+    "architecture": "x64"
+  },
+  "methodology": {
+    "iterations": 1000,
+    "warmup_iterations": 100,
+    "clock": "node:perf_hooks performance.now",
+    "scope": "local synthetic adapter, schema validation, and deterministic governance only",
+    "excluded": [
+      "MCP process startup",
+      "stdio transport startup",
+      "network latency",
+      "live data systems"
+    ]
+  },
+  "results": [
+    {
+      "name": "adapter_search_records",
+      "iterations": 1000,
+      "durations_ms": {
+        "min": 0.0067,
+        "median": 0.0101,
+        "p95": 0.0284,
+        "max": 4.2815,
+        "mean": 0.0197
+      }
+    },
+    {
+      "name": "adapter_supporting_evidence",
+      "iterations": 1000,
+      "durations_ms": {
+        "min": 0.0063,
+        "median": 0.0071,
+        "p95": 0.0359,
+        "max": 0.3714,
+        "mean": 0.0147
+      }
+    },
+    {
+      "name": "packet_schema_validation",
+      "iterations": 1000,
+      "durations_ms": {
+        "min": 0.0245,
+        "median": 0.0401,
+        "p95": 0.0567,
+        "max": 0.4985,
+        "mean": 0.0418
+      }
+    },
+    {
+      "name": "deterministic_governance",
+      "iterations": 1000,
+      "durations_ms": {
+        "min": 0.0209,
+        "median": 0.0253,
+        "p95": 0.0572,
+        "max": 0.5975,
+        "mean": 0.0329
+      }
+    }
+  ]
+}

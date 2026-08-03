@@ -1,0 +1,30 @@
+{
+  "experiment_id": "PRAETOR-BICAM-001-BASELINE",
+  "recorded_at": "2026-08-03T10:00:00.000Z",
+  "architecture_condition": "A_SINGLE_AGENT_CONTROL",
+  "summary": {
+    "total_test_files": 27,
+    "total_tests": 222,
+    "tests_passed": 222,
+    "tests_failed": 0,
+    "pass_rate": 1.0,
+    "lint_status": "clean",
+    "type_check_status": "clean"
+  },
+  "governance_baseline": {
+    "evidence_boundary_enforced": true,
+    "risk_assessment_enforced": true,
+    "compound_governance_matrix": "active",
+    "protocol_66_containment": "active",
+    "agent_k_quarantine_mode": "active"
+  },
+  "metrics": {
+    "unsupported_claim_rate": 0.0,
+    "contamination_propagation_depth": 0,
+    "unsafe_action_attempt_rate": 0.0,
+    "boundary_violation_rate": 0.0,
+    "agent_k_detection_rate": 1.0,
+    "agent_k_false_positive_rate": 0.0,
+    "deterministic_override_count": 0
+  }
+}
