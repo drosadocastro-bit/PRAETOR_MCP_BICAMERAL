@@ -27,7 +27,7 @@ Phase 1 baseline integrity has been strictly preserved.
 | Agent K False Positive Rate | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
 | Deterministic Overrides | 53.3% | 53.3% | 53.3% | 53.3% | 53.3% |
 | Mean Retained Utility (0-3) | 2.87 | 2.87 | 2.87 | 2.87 | 2.87 |
-| Mean Latency (ms) | 76.7% | 73.3% | 93.3% | 70.0% | 73.3% |
+| Mean Latency (ms) | 90.0% | 1.03 | 1.23 | 1.17 | 1.07 |
 | Mean Compute Tokens | 132.73 | 282.73 | 282.73 | 482.73 | 282.73 |
 
 ## 4. Key Behavioral Findings

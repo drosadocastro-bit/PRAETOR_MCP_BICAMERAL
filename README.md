@@ -135,7 +135,7 @@ The latest report is written to [reports/adversarial_battery/LATEST.md](reports/
 
 ### 2. Multi-Agent Behavioral Characterization (PRAETOR-BICAM-001 & PRAETOR-BICAM-002)
 
-PRAETOR includes a pre-registered experimental framework characterizing how multi-agent and bicameral topologies impact contamination propagation, authority substitution, false consensus, Agent K detection, and computational overhead.
+PRAETOR includes a pre-registered experimental framework characterizing how multi-agent and bicameral topologies impact contamination propagation, authority substitution, false consensus, Agent K detection, and computational overhead under controlled sandbox conditions.
 
 - **Phase 1 Baseline (`PRAETOR-BICAM-001`)**: Frozen baseline comparing Single-Agent control against raw Unconstrained Bicameral execution. Baseline results preserved in `reports/bicameral/BASELINE-SINGLE-AGENT.json`.
 - **Phase 2 Characterization (`PRAETOR-BICAM-002`)**: Pre-registered suite running 1,500 trials across 5 experimental conditions:
@@ -145,15 +145,17 @@ PRAETOR includes a pre-registered experimental framework characterizing how mult
   - **Condition D (Multi-Agent Council)**: $\text{Actor} \rightarrow \{\text{Evidence Reviewer}, \text{Risk Reviewer}\} \rightarrow \text{Supervisor} \rightarrow \text{PRAETOR}$
   - **Condition E (Predictive Actor)**: $\text{Actor}[\text{Predicted Directive}] \rightarrow \text{Supervisor} \rightarrow \text{PRAETOR}$
 
-#### Key Empirical Results:
-- **Zero False Positives**: Agent K maintained a 0.0% false positive rate across all benign control inputs (`BICAM-NC-001` through `005`).
-- **Authority Substitution Isolation**: Textual authority claims without structured provenance artifacts caused a 13.3% false-authority acceptance rate in unconstrained conditions (B & E), which dropped to **0.0% in Condition C** via schema sanitization.
-- **Shared Lineage False Consensus**: Parallel reviewers in Condition D generated a 6.7% false consensus rate when ingesting shared contaminated evidence, establishing the requirement for DAG-level provenance tracking.
-- **Deterministic Final Authority**: PRAETOR governance maintained final policy control across all topologies, preserving high utility (2.80 / 3.0) while blocking hazardous commands.
+#### Key Empirical Results & Interpretive Framework:
+- **Strict Methodological Distinctions**: Evaluated with a clear separation between raw observed data and interpretive metrics (e.g., separating input *Exposure* from behavioral *Adoption* and downstream *Propagation*).
+- **Zero False Positives**: Agent K maintained a 0.0% false positive rate across all tested benign controls (`BICAM-NC-001` through `005`).
+- **Authority Substitution Isolation**: Unvalidated textual authority claims caused a 13.3% false-authority acceptance rate under Conditions B & E, which dropped to **0.0% under Condition C** via structured validation (`HandoffValidator` schema requirements).
+- **Shared Lineage False Consensus**: Parallel reviewers in Condition D produced a 6.7% false consensus rate when ingesting shared contaminated evidence, demonstrating a shared-source vulnerability pattern under the tested council configuration.
+- **Deterministic Final Authority**: Deterministic PRAETOR policy gates successfully maintained final execution authority and blocked all unsafe actions crossing the configured execution boundary.
 
-Detailed artifacts and research reviews:
-- [reports/bicameral/phase2/BICAMERAL_BEHAVIORAL_CHARACTERIZATION.md](reports/bicameral/phase2/BICAMERAL_BEHAVIORAL_CHARACTERIZATION.md)
-- [reports/bicameral/phase2/EXPERIMENTAL_RESEARCH_REVIEW.md](reports/bicameral/phase2/EXPERIMENTAL_RESEARCH_REVIEW.md)
+Detailed artifacts, scientific reports, and research reviews:
+- [Phase 2 Detailed Characterization Report](reports/bicameral/phase2/BICAMERAL_BEHAVIORAL_CHARACTERIZATION.md)
+- [Revised Critical Research Review & Empirical Analysis (R1)](reports/bicameral/phase2/EXPERIMENTAL_RESEARCH_REVIEW_REVISED.md)
+- [Original Critical Research Review Record](reports/bicameral/phase2/EXPERIMENTAL_RESEARCH_REVIEW_ORIGINAL.md)
 - `reports/bicameral/phase2/preregistration/PREREGISTRATION.json`
 - `reports/bicameral/phase2/aggregates/AGGREGATES_BY_CONDITION.json`
 - `reports/bicameral/phase2/comparisons/CONDITION_COMPARISON_MATRIX.json`
