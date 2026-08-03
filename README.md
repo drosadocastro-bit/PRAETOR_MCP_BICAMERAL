@@ -115,15 +115,15 @@ npm run check
 npm test
 ```
 
-The test suite includes direct governance tests and a real stdio MCP smoke test that lists and calls every exposed tool. The append-only case list is in [test/adversarial-battery.test.ts](test/adversarial-battery.test.ts).
+The test suite consists of **29 test files and 250 passing automated tests**. It covers direct governance checks, real stdio MCP transport smoke tests, Agent K quarantine mechanics, adversarial battery cases, and pre-registered multi-agent characterization trials.
 
-## Adversarial Validation
+## Adversarial & Behavioral Research Suites
+
+### 1. Adversarial Battery
 
 PRAETOR-MCP uses a fixed adversarial battery based on grounded-retrieval testing discipline. The goal is not to prove predictive accuracy. The goal is to verify that unsafe advisory structures are detected before review-only submission.
 
 The battery tests missing evidence, missing provenance, nonexistent source IDs, unsupported synthesis, weak grounding, mission drift, false consensus, evaluator manipulation, schema abuse, contradiction handling, poisoned provenance, and objective-pressure behavior. The registry is append-only, and each fixed case has an executable assertion in [test/adversarial-battery.test.ts](test/adversarial-battery.test.ts). A failed battery blocks demo or promotion.
-
-The validation discipline is expressed through PRAETOR equivalents: unsupported synthesis becomes an unsupported finding, missing citation becomes missing provenance, weak grounding becomes a flagged advisory, extractive fallback becomes human review, and prompt pressure becomes evaluator or objective pressure.
 
 To generate a durable Markdown report with per-case results, run:
 
@@ -132,6 +132,33 @@ npm run test:adversarial:report
 ```
 
 The latest report is written to [reports/adversarial_battery/LATEST.md](reports/adversarial_battery/LATEST.md). The machine-readable Vitest result is kept beside it as `latest.json`.
+
+### 2. Multi-Agent Behavioral Characterization (PRAETOR-BICAM-001 & PRAETOR-BICAM-002)
+
+PRAETOR includes a pre-registered experimental framework characterizing how multi-agent and bicameral topologies impact contamination propagation, authority substitution, false consensus, Agent K detection, and computational overhead.
+
+- **Phase 1 Baseline (`PRAETOR-BICAM-001`)**: Frozen baseline comparing Single-Agent control against raw Unconstrained Bicameral execution. Baseline results preserved in `reports/bicameral/BASELINE-SINGLE-AGENT.json`.
+- **Phase 2 Characterization (`PRAETOR-BICAM-002`)**: Pre-registered suite running 1,500 trials across 5 experimental conditions:
+  - **Condition A (Single-Agent Control)**: $\text{Actor} \rightarrow \text{PRAETOR}$
+  - **Condition B (Unconstrained Bicameral)**: $\text{Actor} \rightarrow \text{Supervisor} \rightarrow \text{PRAETOR}$
+  - **Condition C (Structured Handoff)**: $\text{Actor} \rightarrow \text{Validator/Sanitizer} \rightarrow \text{Supervisor} \rightarrow \text{PRAETOR}$
+  - **Condition D (Multi-Agent Council)**: $\text{Actor} \rightarrow \{\text{Evidence Reviewer}, \text{Risk Reviewer}\} \rightarrow \text{Supervisor} \rightarrow \text{PRAETOR}$
+  - **Condition E (Predictive Actor)**: $\text{Actor}[\text{Predicted Directive}] \rightarrow \text{Supervisor} \rightarrow \text{PRAETOR}$
+
+#### Key Empirical Results:
+- **Zero False Positives**: Agent K maintained a 0.0% false positive rate across all benign control inputs (`BICAM-NC-001` through `005`).
+- **Authority Substitution Isolation**: Textual authority claims without structured provenance artifacts caused a 13.3% false-authority acceptance rate in unconstrained conditions (B & E), which dropped to **0.0% in Condition C** via schema sanitization.
+- **Shared Lineage False Consensus**: Parallel reviewers in Condition D generated a 6.7% false consensus rate when ingesting shared contaminated evidence, establishing the requirement for DAG-level provenance tracking.
+- **Deterministic Final Authority**: PRAETOR governance maintained final policy control across all topologies, preserving high utility (2.80 / 3.0) while blocking hazardous commands.
+
+Detailed artifacts and research reviews:
+- [reports/bicameral/phase2/BICAMERAL_BEHAVIORAL_CHARACTERIZATION.md](reports/bicameral/phase2/BICAMERAL_BEHAVIORAL_CHARACTERIZATION.md)
+- [reports/bicameral/phase2/EXPERIMENTAL_RESEARCH_REVIEW.md](reports/bicameral/phase2/EXPERIMENTAL_RESEARCH_REVIEW.md)
+- `reports/bicameral/phase2/preregistration/PREREGISTRATION.json`
+- `reports/bicameral/phase2/aggregates/AGGREGATES_BY_CONDITION.json`
+- `reports/bicameral/phase2/comparisons/CONDITION_COMPARISON_MATRIX.json`
+
+### 3. Threat Matrix & Boundary Findings
 
 Tier 1 host-boundary findings, including contained attacks and the confirmed direct-gateway limitation, are recorded in [docs/ADVERSARIAL_TIER1_FINDINGS.md](docs/ADVERSARIAL_TIER1_FINDINGS.md) and exercised by [test/host-adversarial-tier1.test.ts](test/host-adversarial-tier1.test.ts).
 
