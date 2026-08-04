@@ -1,0 +1,84 @@
+{
+  "experimentId": "PRAETOR-EVAL-001",
+  "timestamp": "2026-08-04T23:07:59.373Z",
+  "totalFixtures": 30,
+  "totalRepetitions": 20,
+  "totalEvaluations": 1800,
+  "modes": {
+    "conditionA_LLMOnly": {
+      "mode": "A_LLM_JUDGE_ONLY",
+      "totalRuns": 600,
+      "accuracy": 0.955,
+      "precision": 1,
+      "recall": 0.983,
+      "falsePassRate": 0.012,
+      "falseFailRate": 0,
+      "reviewRate": 0.1,
+      "reproducibilityScore": 0.95,
+      "meanLatencyMs": 58.8,
+      "totalTokens": 396778,
+      "totalCostUsd": 0.0595
+    },
+    "conditionB_AgentKOnly": {
+      "mode": "B_AGENT_K_ONLY",
+      "totalRuns": 600,
+      "accuracy": 0.933,
+      "precision": 1,
+      "recall": 0.95,
+      "falsePassRate": 0.033,
+      "falseFailRate": 0,
+      "reviewRate": 0.1,
+      "reproducibilityScore": 1,
+      "meanLatencyMs": 12,
+      "totalTokens": 0,
+      "totalCostUsd": 0
+    },
+    "conditionC_Hybrid": {
+      "mode": "C_HYBRID",
+      "totalRuns": 600,
+      "accuracy": 0.933,
+      "precision": 1,
+      "recall": 1,
+      "falsePassRate": 0,
+      "falseFailRate": 0,
+      "reviewRate": 0.133,
+      "reproducibilityScore": 1,
+      "meanLatencyMs": 70.8,
+      "totalTokens": 396778,
+      "totalCostUsd": 0.0595
+    }
+  },
+  "complementarityMatrix": {
+    "bothCorrect": 28,
+    "llmOnlyCorrect": 1,
+    "agentKOnlyCorrect": 0,
+    "bothWrong": 1
+  },
+  "majorityVoteComplementarityMatrix": {
+    "bothCorrect": 28,
+    "llmOnlyCorrect": 1,
+    "agentKOnlyCorrect": 0,
+    "bothWrong": 1
+  },
+  "judgeInjectionSuccessRate": {
+    "llmJudge": 0.117,
+    "agentK": 0,
+    "hybrid": 0
+  },
+  "sycophancySusceptibility": {
+    "llmJudge": 0,
+    "agentK": 0,
+    "hybrid": 0
+  },
+  "disagreementCount": 2,
+  "disagreementBreakdown": {
+    "D0_FULL_AGREEMENT": 0,
+    "D1_SEMANTIC_DISAGREEMENT": 1,
+    "D2_STRUCTURAL_DISAGREEMENT": 1,
+    "D3_RISK_DISAGREEMENT": 0,
+    "D4_EVIDENCE_GROUNDING_DISAGREEMENT": 0,
+    "D5_AUTHORITY_DISAGREEMENT": 0,
+    "D6_OVER_REFUSAL_DISAGREEMENT": 0,
+    "D7_JUDGE_MANIPULATION_DISAGREEMENT": 0
+  }
+}

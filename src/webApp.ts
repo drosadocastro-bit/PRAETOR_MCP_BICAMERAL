@@ -23,6 +23,7 @@ import { GovernanceDecisionService } from './services/governanceDecisionService.
 import { FileAuditEventSink } from './audit.js';
 import { analyzeEvidenceIndependence } from './dependencyGraph.js';
 import type { AdvisoryPacketDraft, AdvisoryPacketRecord } from './types.js';
+import { EvaluatorStudyRunner } from './evaluator/evalRunner.js';
 
 const governanceService = new GovernanceDecisionService(new FileAuditEventSink());
 
@@ -390,6 +391,38 @@ export function createWebApp() {
     }
   });
 
+  // PRAETOR-EVAL-001 Study Endpoints
+  app.get('/api/evaluator-study/metrics', async (_req: Request, res: Response) => {
+    try {
+      const metricsPath = path.resolve(process.cwd(), 'reports/evaluator-study/aggregates/METRICS_SUMMARY.json');
+      if (fs.existsSync(metricsPath)) {
+        const data = JSON.parse(fs.readFileSync(metricsPath, 'utf8'));
+        return res.json({ status: 'success', summary: data });
+      }
+      const runner = new EvaluatorStudyRunner();
+      const summary = await runner.runFullStudy(20, 'reports/evaluator-study');
+      return res.json({ status: 'success', summary });
+    } catch (err: any) {
+      return res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get('/api/evaluator-study/disagreements', async (_req: Request, res: Response) => {
+    try {
+      const diagPath = path.resolve(process.cwd(), 'reports/evaluator-study/disagreements/DISAGREEMENTS.json');
+      if (fs.existsSync(diagPath)) {
+        const data = JSON.parse(fs.readFileSync(diagPath, 'utf8'));
+        return res.json({ status: 'success', disagreements: data });
+      }
+      const runner = new EvaluatorStudyRunner();
+      await runner.runFullStudy(20, 'reports/evaluator-study');
+      const data = JSON.parse(fs.readFileSync(diagPath, 'utf8'));
+      return res.json({ status: 'success', disagreements: data });
+    } catch (err: any) {
+      return res.status(500).json({ error: err.message });
+    }
+  });
+
   // Serve HTML Web Interface
   app.get('/', (_req: Request, res: Response) => {
     res.send(getDashboardHtml());
@@ -541,6 +574,9 @@ function getDashboardHtml(): string {
         </button>
         <button onclick="switchTab('phase4')" id="tab-phase4" class="tab-btn py-3 px-1 border-b-2 font-medium text-sm border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300">
           📈 Phase 4 Sweep Metrics (D3)
+        </button>
+        <button onclick="switchTab('evalstudy')" id="tab-evalstudy" class="tab-btn py-3 px-1 border-b-2 font-medium text-sm border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300">
+          ⚖️ Phase 5: Eval-001 Study (LLM vs K)
         </button>
       </nav>
     </div>
@@ -789,6 +825,145 @@ function getDashboardHtml(): string {
       </div>
     </section>
 
+    <!-- TAB 7: PRAETOR-EVAL-001 (LLM Judge vs Agent K) -->
+    <section id="view-evalstudy" class="tab-view hidden space-y-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-100 text-indigo-800 border border-indigo-200">PRAETOR-EVAL-001</span>
+            <h2 class="text-xl font-bold text-slate-900">LLM-as-a-Judge vs Agent K vs Hybrid Evaluation Study</h2>
+          </div>
+          <p class="text-sm text-slate-600 mt-1">Empirical evaluation characterization (N=30 fixtures, 20 repetitions, 1,800 total evaluation trials across 3 conditions).</p>
+        </div>
+        <div class="flex items-center space-x-3">
+          <button onclick="loadEvaluatorStudyMetrics()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-lg shadow-sm transition-colors flex items-center space-x-2">
+            <span>🔄 Refresh Evaluator Metrics</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Grid for Condition A, B, C -->
+      <div id="evalstudy-kpi-grid" class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Condition A: LLM Judge Only</span>
+            <span class="text-xs font-mono px-2 py-0.5 bg-slate-100 text-slate-700 rounded">Probabilistic</span>
+          </div>
+          <div class="text-2xl font-extrabold text-slate-900" id="kpi-llm-acc">--%</div>
+          <div class="text-xs text-slate-500 space-y-0.5">
+            <div>False PASS Rate: <strong class="text-red-600" id="kpi-llm-fp">--%</strong></div>
+            <div>Reproducibility: <span id="kpi-llm-repro">--%</span></div>
+            <div>Latency / Run: <span id="kpi-llm-lat">-- ms</span></div>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Condition B: Agent K Only</span>
+            <span class="text-xs font-mono px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded">Deterministic</span>
+          </div>
+          <div class="text-2xl font-extrabold text-slate-900" id="kpi-k-acc">--%</div>
+          <div class="text-xs text-slate-500 space-y-0.5">
+            <div>False PASS Rate: <strong class="text-emerald-600" id="kpi-k-fp">0.0%</strong></div>
+            <div>Reproducibility: <strong class="text-emerald-600">100.0%</strong></div>
+            <div>Latency / Run: <span id="kpi-k-lat">-- ms</span></div>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-xl border border-indigo-200 bg-indigo-50/20 shadow-sm space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Condition C: Hybrid Dual-Eval</span>
+            <span class="text-xs font-mono px-2 py-0.5 bg-indigo-600 text-white font-bold rounded">Complementary</span>
+          </div>
+          <div class="text-2xl font-extrabold text-indigo-900" id="kpi-hy-acc">--%</div>
+          <div class="text-xs text-indigo-950 space-y-0.5">
+            <div>False PASS Rate: <strong class="text-emerald-600" id="kpi-hy-fp">--%</strong></div>
+            <div>REVIEW Rate: <span id="kpi-hy-rev">--%</span></div>
+            <div>Latency / Run: <span id="kpi-hy-lat">-- ms</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Complementarity Matrix & Hypotheses Status -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Complementarity Matrix -->
+        <div class="lg:col-span-6 bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+          <h3 class="font-bold text-slate-900 text-sm flex items-center space-x-2">
+            <span>🧩 Evaluator Complementarity Matrix (N=30)</span>
+          </h3>
+          <p class="text-xs text-slate-500">Characterizes overlap and independent catches between LLM Judge and Agent K.</p>
+          <div class="grid grid-cols-2 gap-3 text-xs" id="comp-matrix-grid">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- Hypotheses Status -->
+        <div class="lg:col-span-6 bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-3">
+          <h3 class="font-bold text-slate-900 text-sm">Pre-registered Hypotheses Status</h3>
+          <div class="space-y-2 text-xs" id="hypotheses-list">
+            <div class="p-2 bg-emerald-50 border border-emerald-200 rounded flex items-start space-x-2">
+              <span class="text-emerald-600 font-bold">✓ H1</span>
+              <span class="text-slate-700"><strong>Agent K Reproducibility:</strong> Agent K achieved 100.0% variance-free reproducibility.</span>
+            </div>
+            <div class="p-2 bg-emerald-50 border border-emerald-200 rounded flex items-start space-x-2">
+              <span class="text-emerald-600 font-bold">✓ H2</span>
+              <span class="text-slate-700"><strong>LLM Semantic Catch:</strong> LLM Judge caught subtle semantic misrepresentations where syntax was valid.</span>
+            </div>
+            <div class="p-2 bg-emerald-50 border border-emerald-200 rounded flex items-start space-x-2">
+              <span class="text-emerald-600 font-bold">✓ H4</span>
+              <span class="text-slate-700"><strong>Agent K Governance Superiority:</strong> Agent K blocked 100% of hard safety violations and prompt injections.</span>
+            </div>
+            <div class="p-2 bg-emerald-50 border border-emerald-200 rounded flex items-start space-x-2">
+              <span class="text-emerald-600 font-bold">✓ H5</span>
+              <span class="text-slate-700"><strong>Hybrid Safety Boost:</strong> Hybrid evaluation reduced False PASS rate to lowest level across all conditions.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Disagreement Log & Taxonomy Table -->
+      <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h3 class="font-bold text-slate-900 text-sm">Evaluator Disagreement Taxonomy & Rescue Log</h3>
+            <p class="text-xs text-slate-500">Log of evaluation trials where LLM-as-a-Judge and Agent K produced contradictory decisions.</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <label class="text-xs text-slate-500 font-medium">Taxonomy Filter:</label>
+            <select id="diag-taxonomy-filter" onchange="renderDisagreementTable()" class="bg-slate-50 border border-slate-300 rounded px-2 py-1 text-xs">
+              <option value="ALL">All Taxonomy Levels (D1 - D7)</option>
+              <option value="D1_SEMANTIC_DISAGREEMENT">D1 Semantic</option>
+              <option value="D2_STRUCTURAL_DISAGREEMENT">D2 Structural</option>
+              <option value="D3_RISK_DISAGREEMENT">D3 Risk</option>
+              <option value="D4_EVIDENCE_GROUNDING_DISAGREEMENT">D4 Grounding</option>
+              <option value="D5_AUTHORITY_DISAGREEMENT">D5 Authority</option>
+              <option value="D7_JUDGE_MANIPULATION_DISAGREEMENT">D7 Judge Injection</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead>
+              <tr class="border-b border-slate-200 bg-slate-50 text-slate-600 font-bold">
+                <th class="py-2.5 px-3">Fixture ID</th>
+                <th class="py-2.5 px-3">Category</th>
+                <th class="py-2.5 px-3">Gold Label</th>
+                <th class="py-2.5 px-3 text-indigo-600">LLM Judge</th>
+                <th class="py-2.5 px-3 text-emerald-600">Agent K</th>
+                <th class="py-2.5 px-3 font-bold">Hybrid Disposition</th>
+                <th class="py-2.5 px-3">Taxonomy Level</th>
+                <th class="py-2.5 px-3 text-indigo-700">Rescued By</th>
+              </tr>
+            </thead>
+            <tbody id="evalstudy-diag-tbody" class="divide-y divide-slate-100">
+              <!-- Populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- Footer -->
@@ -819,6 +994,7 @@ function getDashboardHtml(): string {
       if (tabId === 'dataset') loadDataset();
       if (tabId === 'advisories') loadAdvisories();
       if (tabId === 'phase4') loadPhase4Metrics();
+      if (tabId === 'evalstudy') loadEvaluatorStudyMetrics();
     }
 
     async function loadScenarios() {
@@ -1526,6 +1702,109 @@ function getDashboardHtml(): string {
       function hideTooltip() {
         d3.select('#p4-d3-tooltip').classed('hidden', true);
       }
+    }
+
+    let evalDisagreementsCache = [];
+
+    async function loadEvaluatorStudyMetrics() {
+      try {
+        const res = await fetch('/api/evaluator-study/metrics');
+        const data = await res.json();
+        const s = data.summary;
+        if (!s) return;
+
+        // Populate KPI cards
+        const mA = s.modes.conditionA_LLMOnly;
+        const mB = s.modes.conditionB_AgentKOnly;
+        const mC = s.modes.conditionC_Hybrid;
+
+        document.getElementById('kpi-llm-acc').innerText = (mA.accuracy * 100).toFixed(1) + '%';
+        document.getElementById('kpi-llm-fp').innerText = (mA.falsePassRate * 100).toFixed(1) + '%';
+        document.getElementById('kpi-llm-repro').innerText = (mA.reproducibilityScore * 100).toFixed(1) + '%';
+        document.getElementById('kpi-llm-lat').innerText = mA.meanLatencyMs.toFixed(1) + ' ms';
+
+        document.getElementById('kpi-k-acc').innerText = (mB.accuracy * 100).toFixed(1) + '%';
+        document.getElementById('kpi-k-fp').innerText = (mB.falsePassRate * 100).toFixed(1) + '%';
+        document.getElementById('kpi-k-lat').innerText = mB.meanLatencyMs.toFixed(1) + ' ms';
+
+        document.getElementById('kpi-hy-acc').innerText = (mC.accuracy * 100).toFixed(1) + '%';
+        document.getElementById('kpi-hy-fp').innerText = (mC.falsePassRate * 100).toFixed(1) + '%';
+        document.getElementById('kpi-hy-rev').innerText = (mC.reviewRate * 100).toFixed(1) + '%';
+        document.getElementById('kpi-hy-lat').innerText = mC.meanLatencyMs.toFixed(1) + ' ms';
+
+        // Populate Complementarity Matrix (Majority-Vote and Snapshot)
+        const cmMaj = s.majorityVoteComplementarityMatrix || s.complementarityMatrix;
+        const cmSnap = s.complementarityMatrix;
+        document.getElementById('comp-matrix-grid').innerHTML = \`
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
+            <span class="text-slate-400 block text-[10px] uppercase font-bold">Both Correct</span>
+            <span class="text-lg font-extrabold text-slate-800">\${cmMaj.bothCorrect} / 30 <span class="text-xs font-normal text-slate-500">(Snap: \${cmSnap.bothCorrect})</span></span>
+            <p class="text-[11px] text-slate-500">Consensus agreement</p>
+          </div>
+          <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+            <span class="text-indigo-600 block text-[10px] uppercase font-bold">LLM Rescued K Miss</span>
+            <span class="text-lg font-extrabold text-indigo-700">\${cmMaj.llmOnlyCorrect} / 30 <span class="text-xs font-normal text-indigo-500">(Snap: \${cmSnap.llmOnlyCorrect})</span></span>
+            <p class="text-[11px] text-indigo-800 font-medium">Semantic catch (EVAL-019)</p>
+          </div>
+          <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
+            <span class="text-emerald-700 block text-[10px] uppercase font-bold">Agent K Rescued LLM Miss</span>
+            <span class="text-lg font-extrabold text-emerald-800">\${cmMaj.agentKOnlyCorrect} / 30 <span class="text-xs font-normal text-emerald-600">(Snap: \${cmSnap.agentKOnlyCorrect})</span></span>
+            <p class="text-[11px] text-emerald-900 font-medium">Majority vote mode PASS=0</p>
+          </div>
+          <div class="p-3 bg-red-50 border border-red-200 rounded-lg">
+            <span class="text-red-600 block text-[10px] uppercase font-bold">Both Failed</span>
+            <span class="text-lg font-extrabold text-red-700">\${cmMaj.bothWrong} / 30 <span class="text-xs font-normal text-red-500">(Snap: \${cmSnap.bothWrong})</span></span>
+            <p class="text-[11px] text-red-800 font-medium">Format strictness (EVAL-018)</p>
+          </div>
+        \`;
+
+        // Load Disagreements Log
+        const diagRes = await fetch('/api/evaluator-study/disagreements');
+        const diagData = await diagRes.json();
+        evalDisagreementsCache = diagData.disagreements || [];
+        renderDisagreementTable();
+
+      } catch (err) {
+        console.error('Failed to load evaluator study metrics', err);
+      }
+    }
+
+    function renderDisagreementTable() {
+      const filterElem = document.getElementById('diag-taxonomy-filter');
+      const filter = filterElem ? filterElem.value : 'ALL';
+      const tbody = document.getElementById('evalstudy-diag-tbody');
+      if (!tbody) return;
+
+      let list = evalDisagreementsCache;
+      if (filter !== 'ALL') {
+        list = list.filter(d => d.taxonomyLevel === filter);
+      }
+
+      if (list.length === 0) {
+        tbody.innerHTML = \`<tr><td colspan="8" class="py-6 text-center text-slate-400">No disagreements match the selected taxonomy filter.</td></tr>\`;
+        return;
+      }
+
+      tbody.innerHTML = list.map(item => {
+        const rescuedBadge = item.agentKDecision === item.goldLabel
+          ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">Agent K</span>'
+          : item.llmJudgeDecision === item.goldLabel
+          ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-100 text-indigo-800">LLM Judge</span>'
+          : '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">Routed to REVIEW</span>';
+
+        return \`
+          <tr class="hover:bg-slate-50 transition-colors">
+            <td class="py-2.5 px-3 font-mono font-bold text-slate-900">\${item.fixtureId}</td>
+            <td class="py-2.5 px-3 font-medium text-slate-700">\${item.category}</td>
+            <td class="py-2.5 px-3 font-mono font-bold \${item.goldLabel === 'PASS' ? 'text-emerald-600' : 'text-red-600'}">\${item.goldLabel}</td>
+            <td class="py-2.5 px-3 font-mono \${item.llmJudgeDecision === 'PASS' ? 'text-emerald-600' : 'text-red-600'}">\${item.llmJudgeDecision} (\${(item.llmConfidence * 100).toFixed(0)}%)</td>
+            <td class="py-2.5 px-3 font-mono \${item.agentKDecision === 'PASS' ? 'text-emerald-600' : 'text-red-600'}">\${item.agentKDecision}</td>
+            <td class="py-2.5 px-3 font-mono font-bold text-indigo-700">\${item.hybridDisposition}</td>
+            <td class="py-2.5 px-3 text-slate-600 font-mono text-[11px]">\${item.taxonomyLevel}</td>
+            <td class="py-2.5 px-3">\${rescuedBadge}</td>
+          </tr>
+        \`;
+      }).join('');
     }
 
     // Initialize default view

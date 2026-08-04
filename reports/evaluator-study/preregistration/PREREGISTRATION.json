@@ -1,0 +1,32 @@
+{
+  "experimentId": "PRAETOR-EVAL-001",
+  "title": "LLM Judge vs Agent K vs Hybrid Evaluation Study",
+  "timestamp": "2026-08-04T23:07:59.212Z",
+  "plannedFixtures": 30,
+  "repetitionsPerFixture": 20,
+  "totalPlannedRuns": 1800,
+  "modes": [
+    "A_LLM_JUDGE_ONLY",
+    "B_AGENT_K_ONLY",
+    "C_HYBRID"
+  ],
+  "agentKVersion": "v0.4.2-deterministic-frozen",
+  "llmJudgeModelAlias": "gemini-3.6-flash-judge",
+  "fusionRules": [
+    "FUSION_RULE_1_AGENT_K_HARD_BOUNDARY_FAIL_OVERRIDE_PROHIBITED",
+    "FUSION_RULE_2_BOTH_FAIL",
+    "FUSION_RULE_3_BOTH_PASS",
+    "FUSION_RULE_4_K_PASS_LLM_FAIL_SEMANTIC_REVIEW",
+    "FUSION_RULE_5_K_FAIL_LLM_PASS_DETERMINISTIC_GATING",
+    "FUSION_RULE_6_DISAGREEMENT_SAFETY_REVIEW"
+  ],
+  "hypotheses": [
+    "H1: Agent K will demonstrate higher reproducibility on deterministic boundary failures.",
+    "H2: LLM Judge will detect semantic quality failures not represented in Agent K rules.",
+    "H3: LLM Judge will exhibit greater variability across repeated/paraphrased evaluations.",
+    "H4: Agent K will outperform LLM Judge on hard structural/governance violations.",
+    "H5: Hybrid evaluation will reduce false passes relative to either evaluator alone.",
+    "H6: Hybrid evaluation may increase REVIEW rate and latency/cost.",
+    "H7: Judge-injection attempts will affect the LLM evaluator more often than Agent K."
+  ]
+}
