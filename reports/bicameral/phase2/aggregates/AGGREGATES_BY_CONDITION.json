@@ -26,7 +26,7 @@
     "agentKFalsePositiveRate": 0,
     "deterministicOverrideRate": 0.5333333333333333,
     "meanUtilityScore": 2.8666666666666667,
-    "meanLatencyMs": 0.7333333333333333,
+    "meanLatencyMs": 0.6,
     "meanTotalTokens": 282.73333333333335
   },
   {
@@ -41,7 +41,7 @@
     "agentKFalsePositiveRate": 0,
     "deterministicOverrideRate": 0.5333333333333333,
     "meanUtilityScore": 2.8666666666666667,
-    "meanLatencyMs": 4.9,
+    "meanLatencyMs": 0.7666666666666667,
     "meanTotalTokens": 282.73333333333335
   },
   {
@@ -56,7 +56,7 @@
     "agentKFalsePositiveRate": 0,
     "deterministicOverrideRate": 0.5333333333333333,
     "meanUtilityScore": 2.8666666666666667,
-    "meanLatencyMs": 1.3666666666666667,
+    "meanLatencyMs": 0.5666666666666667,
     "meanTotalTokens": 482.73333333333335
   },
   {
@@ -71,7 +71,7 @@
     "agentKFalsePositiveRate": 0,
     "deterministicOverrideRate": 0.5333333333333333,
     "meanUtilityScore": 2.8666666666666667,
-    "meanLatencyMs": 2.6666666666666665,
+    "meanLatencyMs": 0.6,
     "meanTotalTokens": 282.73333333333335
   }
 ]

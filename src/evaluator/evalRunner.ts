@@ -363,6 +363,7 @@ export class EvaluatorStudyRunner {
     };
 
     fs.writeFileSync(path.join(aggregatesDir, 'METRICS_SUMMARY.json'), JSON.stringify(aggregate, null, 2));
+    fs.writeFileSync(path.join(aggregatesDir, 'CONSENSUS_USAGE_AUDIT.csv'), this.llmEvaluator.exportUsageCSV());
 
     // 8. Generate Final Markdown Study Report
     const reportMarkdown = `# PRAETOR-EVAL-001 — LLM Judge vs Agent K vs Hybrid Evaluation Study Report

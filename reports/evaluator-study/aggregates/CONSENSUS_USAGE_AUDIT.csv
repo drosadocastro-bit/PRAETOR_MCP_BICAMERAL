@@ -1,0 +1,12 @@
+Metric,Value,Unit,Description
+Consensus_K_Workers,3,workers,Parallel LLM judge workers per decision
+Total_Evaluations,600,evaluations,Total consensus evaluation calls
+Total_Prompt_Tokens,345240,tokens,Cumulative prompt tokens across all k workers
+Total_Completion_Tokens,51538,tokens,Cumulative completion tokens across all k workers
+Total_Tokens,396778,tokens,Cumulative total tokens (prompt + completion)
+Total_Estimated_Cost_USD,0.082688,USD,Cumulative estimated financial cost
+Average_Tokens_Per_Eval,661,tokens/eval,Average token consumption per consensus decision
+Average_Cost_Per_Eval_USD,0.000138,USD/eval,Average estimated cost per consensus decision
+Prompt_Cost_Per_1k_Tokens_USD,0.000150,USD,Pricing rate for prompt tokens
+Completion_Cost_Per_1k_Tokens_USD,0.000600,USD,Pricing rate for completion tokens
+Audit_Export_Timestamp,"2026-08-05T12:11:15.542Z",ISO-8601,Timestamp of audit summary export

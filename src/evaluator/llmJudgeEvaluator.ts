@@ -137,9 +137,12 @@ export class LLMJudgeEvaluator {
     const latencyMs = Math.round(40 + Math.random() * 25);
     const completionTokens = Math.ceil((explanation.length + 40) / 4);
 
+    const confidenceVal = Math.min(1.0, Math.max(0.0, Number(confidence.toFixed(2))));
+
     return {
       decision,
-      confidence: Math.min(1.0, Math.max(0.0, Number(confidence.toFixed(2)))),
+      confidence: confidenceVal,
+      confidenceScore: confidenceVal,
       reasonCodes,
       semanticQuality: Number(semanticQuality.toFixed(2)),
       evidenceGrounding: Number(evidenceGrounding.toFixed(2)),
@@ -155,24 +158,301 @@ export class LLMJudgeEvaluator {
   }
 }
 
+export interface ConsensusRetryOptions {
+  maxRetries?: number;
+  initialDelayMs?: number;
+  backoffFactor?: number;
+}
+
+export interface TokenPricingModel {
+  promptCostPer1k: number;
+  completionCostPer1k: number;
+}
+
+export interface ConsensusUsageMetrics {
+  totalEvaluations: number;
+  totalPromptTokens: number;
+  totalCompletionTokens: number;
+  totalTokens: number;
+  estimatedCostUsd: number;
+  averageTokensPerEval: number;
+  averageCostPerEvalUsd: number;
+}
+
+export class ConsensusTokenUsageMiddleware {
+  private metrics: ConsensusUsageMetrics = {
+    totalEvaluations: 0,
+    totalPromptTokens: 0,
+    totalCompletionTokens: 0,
+    totalTokens: 0,
+    estimatedCostUsd: 0,
+    averageTokensPerEval: 0,
+    averageCostPerEvalUsd: 0,
+  };
+
+  private pricing: TokenPricingModel;
+
+  constructor(pricing?: Partial<TokenPricingModel>) {
+    this.pricing = {
+      promptCostPer1k: pricing?.promptCostPer1k ?? 0.00015,
+      completionCostPer1k: pricing?.completionCostPer1k ?? 0.0006,
+    };
+  }
+
+  public track(tokenUsage: { promptTokens: number; completionTokens: number; totalTokens: number }): { evalCostUsd: number; metrics: ConsensusUsageMetrics } {
+    const promptCost = (tokenUsage.promptTokens / 1000) * this.pricing.promptCostPer1k;
+    const completionCost = (tokenUsage.completionTokens / 1000) * this.pricing.completionCostPer1k;
+    const evalCostUsd = Number((promptCost + completionCost).toFixed(6));
+
+    this.metrics.totalEvaluations += 1;
+    this.metrics.totalPromptTokens += tokenUsage.promptTokens;
+    this.metrics.totalCompletionTokens += tokenUsage.completionTokens;
+    this.metrics.totalTokens += tokenUsage.totalTokens;
+    this.metrics.estimatedCostUsd = Number((this.metrics.estimatedCostUsd + evalCostUsd).toFixed(6));
+    this.metrics.averageTokensPerEval = Math.round(this.metrics.totalTokens / this.metrics.totalEvaluations);
+    this.metrics.averageCostPerEvalUsd = Number((this.metrics.estimatedCostUsd / this.metrics.totalEvaluations).toFixed(6));
+
+    return { evalCostUsd, metrics: { ...this.metrics } };
+  }
+
+  public getMetrics(): ConsensusUsageMetrics {
+    return { ...this.metrics };
+  }
+
+  public logSummary(evalId?: string): string {
+    const logLine = `[Consensus Usage Overhead${evalId ? ` - ${evalId}` : ''}] ` +
+      `Evals: ${this.metrics.totalEvaluations} | ` +
+      `Tokens: ${this.metrics.totalTokens} (Prompt: ${this.metrics.totalPromptTokens}, Completion: ${this.metrics.totalCompletionTokens}) | ` +
+      `Estimated Cost: $${this.metrics.estimatedCostUsd.toFixed(6)} USD | ` +
+      `Avg/Eval: ${this.metrics.averageTokensPerEval} tokens ($${this.metrics.averageCostPerEvalUsd.toFixed(6)})`;
+    console.log(logLine);
+    return logLine;
+  }
+
+  public exportCSV(consensusK: number = 3): string {
+    const lines: string[] = [
+      'Metric,Value,Unit,Description',
+      `Consensus_K_Workers,${consensusK},workers,Parallel LLM judge workers per decision`,
+      `Total_Evaluations,${this.metrics.totalEvaluations},evaluations,Total consensus evaluation calls`,
+      `Total_Prompt_Tokens,${this.metrics.totalPromptTokens},tokens,Cumulative prompt tokens across all k workers`,
+      `Total_Completion_Tokens,${this.metrics.totalCompletionTokens},tokens,Cumulative completion tokens across all k workers`,
+      `Total_Tokens,${this.metrics.totalTokens},tokens,Cumulative total tokens (prompt + completion)`,
+      `Total_Estimated_Cost_USD,${this.metrics.estimatedCostUsd.toFixed(6)},USD,Cumulative estimated financial cost`,
+      `Average_Tokens_Per_Eval,${this.metrics.averageTokensPerEval},tokens/eval,Average token consumption per consensus decision`,
+      `Average_Cost_Per_Eval_USD,${this.metrics.averageCostPerEvalUsd.toFixed(6)},USD/eval,Average estimated cost per consensus decision`,
+      `Prompt_Cost_Per_1k_Tokens_USD,${this.pricing.promptCostPer1k.toFixed(6)},USD,Pricing rate for prompt tokens`,
+      `Completion_Cost_Per_1k_Tokens_USD,${this.pricing.completionCostPer1k.toFixed(6)},USD,Pricing rate for completion tokens`,
+      `Audit_Export_Timestamp,"${new Date().toISOString()}",ISO-8601,Timestamp of audit summary export`
+    ];
+    return lines.join('\n');
+  }
+
+  public reset(): void {
+    this.metrics = {
+      totalEvaluations: 0,
+      totalPromptTokens: 0,
+      totalCompletionTokens: 0,
+      totalTokens: 0,
+      estimatedCostUsd: 0,
+      averageTokensPerEval: 0,
+      averageCostPerEvalUsd: 0,
+    };
+  }
+}
+
+export interface ConsensusLLMJudgeOptions {
+  retryOptions?: ConsensusRetryOptions;
+  usageMiddleware?: ConsensusTokenUsageMiddleware;
+  confidenceMonitor?: ConsensusConfidenceMonitor;
+  confidenceMonitorOptions?: ConfidenceMonitorOptions;
+  pricing?: Partial<TokenPricingModel>;
+}
+
+export interface ConfidenceMonitorOptions {
+  windowSize?: number;
+  alertThreshold?: number;
+  onAlert?: (alert: ConfidenceAlert) => void;
+}
+
+export interface ConfidenceAlert {
+  alertTriggered: boolean;
+  averageConfidence: number;
+  sampleCount: number;
+  windowSize: number;
+  threshold: number;
+  timestamp: string;
+  message: string;
+}
+
+export class ConsensusConfidenceMonitor {
+  private windowSize: number;
+  private alertThreshold: number;
+  private scores: number[] = [];
+  private onAlert?: (alert: ConfidenceAlert) => void;
+
+  constructor(options?: ConfidenceMonitorOptions) {
+    this.windowSize = options?.windowSize ?? 50;
+    this.alertThreshold = options?.alertThreshold ?? 0.7;
+    this.onAlert = options?.onAlert;
+  }
+
+  public record(confidenceScore: number): ConfidenceAlert | null {
+    this.scores.push(confidenceScore);
+    if (this.scores.length > this.windowSize) {
+      this.scores.shift();
+    }
+
+    const averageConfidence = this.getAverageConfidence();
+    const alertTriggered = averageConfidence < this.alertThreshold;
+
+    if (alertTriggered) {
+      const alert: ConfidenceAlert = {
+        alertTriggered: true,
+        averageConfidence: Number(averageConfidence.toFixed(4)),
+        sampleCount: this.scores.length,
+        windowSize: this.windowSize,
+        threshold: this.alertThreshold,
+        timestamp: new Date().toISOString(),
+        message: `SYSTEM ALERT: Rolling average confidence score (${averageConfidence.toFixed(2)}) dropped below threshold (${this.alertThreshold}) over ${this.scores.length} samples.`
+      };
+      console.warn(`[ConsensusConfidenceMonitor] ${alert.message}`);
+      if (this.onAlert) {
+        this.onAlert(alert);
+      }
+      return alert;
+    }
+    return null;
+  }
+
+  public getAverageConfidence(): number {
+    if (this.scores.length === 0) return 1.0;
+    const sum = this.scores.reduce((a, b) => a + b, 0);
+    return Number((sum / this.scores.length).toFixed(4));
+  }
+
+  public isAlertActive(): boolean {
+    return this.getAverageConfidence() < this.alertThreshold;
+  }
+
+  public getAlertStatus(): {
+    isAlert: boolean;
+    averageConfidence: number;
+    sampleCount: number;
+    threshold: number;
+    windowSize: number;
+    alertMessage?: string;
+  } {
+    const avg = this.getAverageConfidence();
+    const isAlert = avg < this.alertThreshold;
+    return {
+      isAlert,
+      averageConfidence: avg,
+      sampleCount: this.scores.length,
+      threshold: this.alertThreshold,
+      windowSize: this.windowSize,
+      alertMessage: isAlert
+        ? `SYSTEM ALERT: Rolling average confidence score (${avg.toFixed(2)}) dropped below threshold (${this.alertThreshold}) over ${this.scores.length} samples.`
+        : undefined
+    };
+  }
+
+  public getRecentScores(): number[] {
+    return [...this.scores];
+  }
+
+  public reset(): void {
+    this.scores = [];
+  }
+}
+
 export class ConsensusLLMJudgeEvaluator {
   private baseJudge: LLMJudgeEvaluator;
   private k: number;
+  private maxRetries: number;
+  private initialDelayMs: number;
+  private backoffFactor: number;
+  private usageMiddleware: ConsensusTokenUsageMiddleware;
+  private confidenceMonitor: ConsensusConfidenceMonitor;
 
-  constructor(baseJudge?: LLMJudgeEvaluator, k: number = 3) {
+  constructor(
+    baseJudge?: LLMJudgeEvaluator,
+    k: number = 3,
+    options?: ConsensusRetryOptions | ConsensusLLMJudgeOptions
+  ) {
     this.baseJudge = baseJudge || new LLMJudgeEvaluator();
     this.k = k;
+
+    let retryOpts: ConsensusRetryOptions | undefined;
+    if (options && ('maxRetries' in options || 'initialDelayMs' in options || 'backoffFactor' in options)) {
+      retryOpts = options as ConsensusRetryOptions;
+      this.usageMiddleware = new ConsensusTokenUsageMiddleware();
+      this.confidenceMonitor = new ConsensusConfidenceMonitor();
+    } else if (
+      options &&
+      ('retryOptions' in options ||
+        'usageMiddleware' in options ||
+        'confidenceMonitor' in options ||
+        'confidenceMonitorOptions' in options ||
+        'pricing' in options)
+    ) {
+      const fullOpts = options as ConsensusLLMJudgeOptions;
+      retryOpts = fullOpts.retryOptions;
+      this.usageMiddleware = fullOpts.usageMiddleware || new ConsensusTokenUsageMiddleware(fullOpts.pricing);
+      this.confidenceMonitor =
+        fullOpts.confidenceMonitor || new ConsensusConfidenceMonitor(fullOpts.confidenceMonitorOptions);
+    } else {
+      this.usageMiddleware = new ConsensusTokenUsageMiddleware();
+      this.confidenceMonitor = new ConsensusConfidenceMonitor();
+    }
+
+    this.maxRetries = retryOpts?.maxRetries ?? 3;
+    this.initialDelayMs = retryOpts?.initialDelayMs ?? 100;
+    this.backoffFactor = retryOpts?.backoffFactor ?? 2;
+  }
+
+  public getUsageMetrics(): ConsensusUsageMetrics {
+    return this.usageMiddleware.getMetrics();
+  }
+
+  public getUsageMiddleware(): ConsensusTokenUsageMiddleware {
+    return this.usageMiddleware;
+  }
+
+  public exportUsageCSV(): string {
+    return this.usageMiddleware.exportCSV(this.k);
+  }
+
+  public getConfidenceMonitor(): ConsensusConfidenceMonitor {
+    return this.confidenceMonitor;
+  }
+
+  private async executeWorkerWithRetry(fixture: EvalFixture, workerRepIndex: number): Promise<LLMJudgeResult> {
+    let attempt = 0;
+    let delay = this.initialDelayMs;
+
+    while (true) {
+      try {
+        return await this.baseJudge.evaluate(fixture, workerRepIndex);
+      } catch (error) {
+        attempt++;
+        if (attempt > this.maxRetries) {
+          throw error;
+        }
+        await new Promise(resolve => setTimeout(resolve, delay));
+        delay *= this.backoffFactor;
+      }
+    }
   }
 
   /**
-   * Fires k parallel LLM Judge worker calls (fan-out) and aggregates majority vote.
+   * Fires k parallel LLM Judge worker calls (fan-out) with exponential backoff retries and aggregates majority vote.
    * On 3-way tie (e.g. 1 PASS, 1 REVIEW, 1 FAIL), explicitly defaults to 'REVIEW'.
    */
   public async evaluate(fixture: EvalFixture, repetitionIndex: number = 1): Promise<LLMJudgeResult> {
     const workerPromises: Promise<LLMJudgeResult>[] = [];
     for (let workerIdx = 0; workerIdx < this.k; workerIdx++) {
       const workerRepIndex = (repetitionIndex - 1) * this.k + workerIdx + 1;
-      workerPromises.push(this.baseJudge.evaluate(fixture, workerRepIndex));
+      workerPromises.push(this.executeWorkerWithRetry(fixture, workerRepIndex));
     }
 
     const workerResults = await Promise.all(workerPromises);
@@ -200,6 +480,7 @@ export class ConsensusLLMJudgeEvaluator {
     const sampleWorkers = winningWorkers.length > 0 ? winningWorkers : workerResults;
 
     const confidenceRatio = Number((voteDistribution[finalDecision] / this.k).toFixed(2));
+    const confidenceScore = Number((Math.floor((voteDistribution[finalDecision] / this.k) * 100) / 100).toFixed(2));
     const semanticQuality = Number(
       (sampleWorkers.reduce((acc, r) => acc + r.semanticQuality, 0) / sampleWorkers.length).toFixed(2)
     );
@@ -219,6 +500,14 @@ export class ConsensusLLMJudgeEvaluator {
     const totalCompletionTokens = workerResults.reduce((sum, r) => sum + r.tokenUsage.completionTokens, 0);
     const totalTokens = totalPromptTokens + totalCompletionTokens;
 
+    const { evalCostUsd } = this.usageMiddleware.track({
+      promptTokens: totalPromptTokens,
+      completionTokens: totalCompletionTokens,
+      totalTokens
+    });
+
+    this.confidenceMonitor.record(confidenceScore);
+
     const firstSample = sampleWorkers[0];
 
     return {
@@ -233,10 +522,12 @@ export class ConsensusLLMJudgeEvaluator {
       tokenUsage: {
         promptTokens: totalPromptTokens,
         completionTokens: totalCompletionTokens,
-        totalTokens
+        totalTokens,
+        estimatedCostUsd: evalCostUsd
       },
       consensusK: this.k,
       confidenceRatio,
+      confidenceScore,
       voteDistribution
     };
   }

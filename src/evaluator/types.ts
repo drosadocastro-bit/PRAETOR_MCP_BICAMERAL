@@ -42,9 +42,11 @@ export interface LLMJudgeResult {
     promptTokens: number;
     completionTokens: number;
     totalTokens: number;
+    estimatedCostUsd?: number;
   };
   consensusK?: number;
   confidenceRatio?: number;
+  confidenceScore?: number;
   voteDistribution?: {
     PASS: number;
     REVIEW: number;

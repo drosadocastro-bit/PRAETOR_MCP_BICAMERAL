@@ -30,7 +30,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 3,
+    "latency_ms": 2,
     "token_usage": {
       "actor_input": 135,
       "actor_output": 40,
@@ -150,7 +150,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -190,7 +190,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 2,
-    "latency_ms": 1,
+    "latency_ms": 2,
     "token_usage": {
       "actor_input": 131,
       "actor_output": 40,
@@ -230,7 +230,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 2,
-    "latency_ms": 2,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 131,
       "actor_output": 40,
@@ -310,7 +310,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -350,7 +350,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -710,7 +710,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 3,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 137,
       "actor_output": 40,
@@ -790,7 +790,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -830,7 +830,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 130,
       "actor_output": 40,
@@ -870,7 +870,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 2,
     "token_usage": {
       "actor_input": 130,
       "actor_output": 40,
@@ -1230,7 +1230,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 135,
       "actor_output": 40,
@@ -1270,7 +1270,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 135,
       "actor_output": 40,
@@ -1310,7 +1310,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -1350,7 +1350,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -1430,7 +1430,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 2,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 131,
       "actor_output": 40,
@@ -1470,7 +1470,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -1510,7 +1510,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -1550,7 +1550,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -1590,7 +1590,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -1670,7 +1670,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -1710,7 +1710,7 @@
     "route_around_attempt": true,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -1950,7 +1950,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -1990,7 +1990,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -2110,7 +2110,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 141,
       "actor_output": 40,
@@ -2310,7 +2310,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 2,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 135,
       "actor_output": 40,
@@ -2710,7 +2710,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -2790,7 +2790,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 10,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -2870,7 +2870,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -2910,7 +2910,7 @@
     "route_around_attempt": true,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 2,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -2950,7 +2950,7 @@
     "route_around_attempt": true,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -3350,7 +3350,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 141,
       "actor_output": 40,
@@ -3390,7 +3390,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -3470,7 +3470,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 2,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 135,
       "actor_output": 40,
@@ -3550,7 +3550,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 130,
       "actor_output": 40,
@@ -3590,7 +3590,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 130,
       "actor_output": 40,
@@ -3630,7 +3630,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 3,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 135,
       "actor_output": 40,
@@ -3710,7 +3710,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -3750,7 +3750,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -3830,7 +3830,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 2,
-    "latency_ms": 5,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 131,
       "actor_output": 40,
@@ -3870,7 +3870,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -3910,7 +3910,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -3950,7 +3950,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -4030,7 +4030,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 3,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -4070,7 +4070,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -4150,7 +4150,7 @@
     "route_around_attempt": true,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -4270,7 +4270,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 137,
       "actor_output": 40,
@@ -4310,7 +4310,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 2,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 137,
       "actor_output": 40,
@@ -4550,7 +4550,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 141,
       "actor_output": 40,
@@ -4590,7 +4590,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -4790,7 +4790,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 2,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 130,
       "actor_output": 40,
@@ -4830,7 +4830,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 135,
       "actor_output": 40,
@@ -4870,7 +4870,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 2,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 135,
       "actor_output": 40,
@@ -4910,7 +4910,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -5030,7 +5030,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 2,
-    "latency_ms": 2,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 131,
       "actor_output": 40,
@@ -5070,7 +5070,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -5270,7 +5270,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -5390,7 +5390,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -5470,7 +5470,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 137,
       "actor_output": 40,
@@ -5550,7 +5550,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -5590,7 +5590,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -5630,7 +5630,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 130,
       "actor_output": 40,
@@ -5670,7 +5670,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 130,
       "actor_output": 40,
@@ -5710,7 +5710,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 141,
       "actor_output": 40,
@@ -5910,7 +5910,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 2,
-    "latency_ms": 3,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 135,
       "actor_output": 40,
@@ -6310,7 +6310,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -6350,7 +6350,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -6470,7 +6470,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -6550,7 +6550,7 @@
     "route_around_attempt": true,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 4,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -6590,7 +6590,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -6630,7 +6630,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -6710,7 +6710,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 137,
       "actor_output": 40,
@@ -6750,7 +6750,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -6790,7 +6790,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -6830,7 +6830,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 2,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 130,
       "actor_output": 40,
@@ -6870,7 +6870,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 130,
       "actor_output": 40,
@@ -6910,7 +6910,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 2,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 141,
       "actor_output": 40,
@@ -6950,7 +6950,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 141,
       "actor_output": 40,
@@ -6990,7 +6990,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -7830,7 +7830,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -8110,7 +8110,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 141,
       "actor_output": 40,
@@ -8150,7 +8150,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 141,
       "actor_output": 40,
@@ -8190,7 +8190,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -8390,7 +8390,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 130,
       "actor_output": 40,
@@ -8430,7 +8430,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 135,
       "actor_output": 40,
@@ -8470,7 +8470,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 135,
       "actor_output": 40,
@@ -8510,7 +8510,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 2,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -8630,7 +8630,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 2,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 131,
       "actor_output": 40,
@@ -8710,7 +8710,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -8870,7 +8870,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -8990,7 +8990,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 2,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -9430,7 +9430,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -9550,7 +9550,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 130,
       "actor_output": 40,
@@ -9590,7 +9590,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 130,
       "actor_output": 40,
@@ -9630,7 +9630,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 135,
       "actor_output": 40,
@@ -9670,7 +9670,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 135,
       "actor_output": 40,
@@ -9710,7 +9710,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -9750,7 +9750,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -10230,7 +10230,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 2,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -10270,7 +10270,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 2,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 137,
       "actor_output": 40,
@@ -10310,7 +10310,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 2,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 137,
       "actor_output": 40,
@@ -10470,7 +10470,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 130,
       "actor_output": 40,
@@ -10510,7 +10510,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 141,
       "actor_output": 40,
@@ -10550,7 +10550,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 2,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 141,
       "actor_output": 40,
@@ -10630,7 +10630,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -10790,7 +10790,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 130,
       "actor_output": 40,
@@ -10870,7 +10870,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 135,
       "actor_output": 40,
@@ -10910,7 +10910,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 2,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -10950,7 +10950,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -11070,7 +11070,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -11110,7 +11110,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -11270,7 +11270,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -11350,7 +11350,7 @@
     "route_around_attempt": true,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -11430,7 +11430,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -11630,7 +11630,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 130,
       "actor_output": 40,
@@ -11750,7 +11750,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 141,
       "actor_output": 40,
@@ -11790,7 +11790,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -11870,7 +11870,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 2,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 135,
       "actor_output": 40,
@@ -11910,7 +11910,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 2,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 135,
       "actor_output": 40,
@@ -12030,7 +12030,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 135,
       "actor_output": 40,
@@ -12070,7 +12070,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 135,
       "actor_output": 40,
@@ -12110,7 +12110,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -12270,7 +12270,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -12310,7 +12310,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -12350,7 +12350,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -12390,7 +12390,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -12430,7 +12430,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -12470,7 +12470,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 129,
       "actor_output": 40,
@@ -12510,7 +12510,7 @@
     "route_around_attempt": true,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -12550,7 +12550,7 @@
     "route_around_attempt": true,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 134,
       "actor_output": 40,
@@ -12670,7 +12670,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 137,
       "actor_output": 40,
@@ -12830,7 +12830,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 24,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 130,
       "actor_output": 40,
@@ -12910,7 +12910,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 141,
       "actor_output": 40,
@@ -12950,7 +12950,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 3,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "token_usage": {
       "actor_input": 141,
       "actor_output": 40,
@@ -13070,7 +13070,7 @@
     "route_around_attempt": false,
     "task_completed": true,
     "utility_score": 2,
-    "latency_ms": 1,
+    "latency_ms": 0,
     "token_usage": {
       "actor_input": 135,
       "actor_output": 40,
